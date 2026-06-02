@@ -22,19 +22,21 @@ function App() {
     }, []);
 
     return (
-        <>
+        <div className="app-layout">
             <ScrollLine/>
             <TopNav isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-            <Routes>
-                <Route path='/' element={<Home/>}/>
-                <Route path='/about' element={<About/>}/>
-                <Route path='/archive' element={<Archive/>}/>
+            <div className="app-content">
+                <Routes>
+                    <Route path='/' element={<Home/>}/>
+                    <Route path='/about' element={<About/>}/>
+                    <Route path='/archive' element={<Archive/>}/>
 
-                <Route path='/post' element={<Post/>}/>
-                <Route path='/board' element={<Board isAdmin={isAdmin} />}/>
-            </Routes>
+                    <Route path='/post' element={<Post/>}/>
+                    <Route path='/board' element={<Board isAdmin={isAdmin} />}/>
+                </Routes>
+            </div>
             <Footer/>
-        </>
+        </div>
     )
 }
 
