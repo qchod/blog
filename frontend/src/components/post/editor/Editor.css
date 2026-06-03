@@ -43,28 +43,39 @@ h1 {
     color: #333;
 }
 
-.editor-container {
+.editor-toolbar-box {
+    width: 600px;
+    background: #fff;
+    border: 1.5px solid #EEEEEE;
+    border-bottom: none;
+    box-sizing: border-box;
+}
+
+.editor-content-box {
     width: 600px;
     height: 50vh;
     color: #000;
-    position: relative;
     line-height: 20px;
     font-weight: 400;
     text-align: left;
-    /*border-radius: 10px 10px 2px 2px;*/
     border: 1.5px solid #EEEEEE;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
 .editor-inner {
     background: #fff;
     position: relative;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .editor-input {
     min-height: 150px;
     resize: none;
     font-size: 15px;
-    caret-color: rgb(5, 5, 5);
     position: relative;
     tab-size: 1;
     outline: 0;
@@ -316,13 +327,9 @@ pre::-webkit-scrollbar-thumb {
 
 .toolbar {
     display: flex;
-    margin-bottom: 1px;
     background: #fff;
     padding: 4px;
-    /*border-top-left-radius: 10px;*/
-    /*border-top-right-radius: 10px;*/
     vertical-align: middle;
-    border-bottom: 1.5px solid #EEEEEE;
 }
 
 .toolbar button.toolbar-item {
@@ -438,4 +445,140 @@ i.right-align {
 
 i.justify-align {
     background-image: url(public/editorIcons/justify.svg);
+}
+
+i.image {
+    background-image: url(public/editorIcons/image.svg);
+}
+
+i.paperclip {
+    background-image: url(public/editorIcons/paperclip.svg);
+}
+
+.editor-image-wrapper {
+    display: block;
+}
+
+.editor-image {
+    max-width: 100%;
+    display: block;
+    margin: 4px 0;
+}
+
+/* Post wrapper */
+.post-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 600px;
+}
+
+.post-title-input {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.title-divider {
+    margin: 0 10px;
+    border-top: 1.5px solid #EEEEEE;
+    flex-shrink: 0;
+}
+
+.post-title-input::placeholder {
+    color: #999;
+}
+
+/* Attachments */
+.post-attachments {
+    border: 1.5px solid #EEEEEE;
+    border-top: none;
+    padding: 8px 10px;
+    background: #fff;
+}
+
+.attachment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.attachment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.attachment-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    margin-right: 8px;
+}
+
+.attachment-remove {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #999;
+    padding: 0 2px;
+    line-height: 1;
+}
+
+.attachment-remove:hover {
+    color: #333;
+}
+
+.attachment-add-btn {
+    border: 1px dashed #ccc;
+    background: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: #666;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.attachment-add-btn:hover {
+    background: #f5f5f5;
+}
+
+/* Save button */
+.post-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.save-btn {
+    padding: 8px 24px;
+    background-color: #212529;
+    color: #fff;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: inherit;
+    margin-top: auto;
+}
+
+.save-btn:hover:not(:disabled) {
+    background: #555;
+}
+
+.save-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
 }

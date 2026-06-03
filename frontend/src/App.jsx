@@ -1,6 +1,7 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react';
+import { ToastProvider } from './components/common/Toast';
 
 import TopNav from "./components/common/top/TopNav.jsx"
 import ScrollLine from './components/common/top/ScrollLine.jsx';
@@ -22,21 +23,23 @@ function App() {
     }, []);
 
     return (
-        <div className="app-layout">
-            <ScrollLine/>
-            <TopNav isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-            <div className="app-content">
-                <Routes>
-                    <Route path='/' element={<Home/>}/>
-                    <Route path='/about' element={<About/>}/>
-                    <Route path='/archive' element={<Archive/>}/>
+        <ToastProvider>
+            <div className="app-layout">
+                <ScrollLine/>
+                <TopNav isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
+                <div className="app-content">
+                    <Routes>
+                        <Route path='/' element={<Home/>}/>
+                        <Route path='/about' element={<About/>}/>
+                        <Route path='/archive' element={<Archive/>}/>
 
-                    <Route path='/post' element={<Post/>}/>
-                    <Route path='/board' element={<Board isAdmin={isAdmin} />}/>
-                </Routes>
+                        <Route path='/post' element={<Post/>}/>
+                        <Route path='/board' element={<Board isAdmin={isAdmin} />}/>
+                    </Routes>
+                </div>
+                <Footer/>
             </div>
-            <Footer/>
-        </div>
+        </ToastProvider>
     )
 }
 

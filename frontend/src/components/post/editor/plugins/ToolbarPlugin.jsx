@@ -20,14 +20,18 @@ import {
     UNDO_COMMAND,
 } from 'lexical';
 import {useCallback, useEffect, useRef, useState} from 'react';
+import {uploadImage} from '../../../../api/postApi';
+import {INSERT_IMAGE_COMMAND} from './ImagePlugin';
 
 function Divider() {
     return <div className="divider" />;
 }
 
-export default function ToolbarPlugin() {
+export default function ToolbarPlugin({ onAttachmentAdd }) {
     const [editor] = useLexicalComposerContext();
     const toolbarRef = useRef(null);
+    const imageInputRef = useRef(null);
+    const attachmentInputRef = useRef(null);
     const [canUndo, setCanUndo] = useState(false);
     const [canRedo, setCanRedo] = useState(false);
     const [isBold, setIsBold] = useState(false);
@@ -38,7 +42,6 @@ export default function ToolbarPlugin() {
     const $updateToolbar = useCallback(() => {
         const selection = $getSelection();
         if ($isRangeSelection(selection)) {
-            // Update text format
             setIsBold(selection.hasFormat('bold'));
             setIsItalic(selection.hasFormat('italic'));
             setIsUnderline(selection.hasFormat('underline'));
@@ -82,6 +85,19 @@ export default function ToolbarPlugin() {
             ),
         );
     }, [editor, $updateToolbar]);
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        e.target.value = '';
+        try {
+            const { url } = await uploadImage(file);
+            editor.dispatchCommand(INSERT_IMAGE_COMMAND, { src: url, altText: file.name });
+        } catch (err) {
+            console.error(err);
+            alert('이미지 업로드에 실패했습니다.');
+        }
+    };
 
     return (
         <div className="toolbar" ref={toolbarRef}>
@@ -165,10 +181,37 @@ export default function ToolbarPlugin() {
                 onClick={() => {
                     editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify');
                 }}
-                className="toolbar-item"
+                className="toolbar-item spaced"
                 aria-label="Justify Align">
                 <i className="format justify-align" />
-            </button>{' '}
+            </button>
+            <Divider />
+            <button
+                onClick={() => imageInputRef.current.click()}
+                className="toolbar-item spaced"
+                aria-label="Insert Image">
+                <i className="format image" />
+            </button>
+            <input
+                type="file"
+                accept="image/*"
+                ref={imageInputRef}
+                style={{ display: 'none' }}
+                onChange={handleImageUpload}
+            />
+            <button
+                onClick={() => attachmentInputRef.current.click()}
+                className="toolbar-item"
+                aria-label="Add Attachment">
+                <i className="format paperclip" />
+            </button>
+            <input
+                type="file"
+                multiple
+                ref={attachmentInputRef}
+                style={{ display: 'none' }}
+                onChange={onAttachmentAdd}
+            />
         </div>
     );
 }
