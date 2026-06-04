@@ -1,6 +1,7 @@
 package click.bcyeon.back01.restapi.post.controller;
 
 import click.bcyeon.back01.restapi.post.dto.PostDto;
+import click.bcyeon.back01.restapi.post.dto.PostListResponse;
 import click.bcyeon.back01.restapi.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,19 @@ public class PostController {
         } catch (IOException e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable int id) {
+        postService.deletePost(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<PostListResponse> getPostList(
+            @RequestParam(defaultValue = "0") int lastId,
+            @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(postService.getPostList(lastId, size));
     }
 
     @PostMapping("/save")

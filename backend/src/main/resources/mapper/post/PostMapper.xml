@@ -32,4 +32,30 @@
         )
     </insert>
 
+
+    <select id="selectPostFiles" resultType="click.bcyeon.back01.restapi.post.dto.PostFileDto">
+        SELECT id, post_id, original_name, saved_name, file_type, file_url, created_at
+        FROM post_file
+        WHERE post_id = #{postId}
+    </select>
+
+    <delete id="deletePostFiles">
+        DELETE FROM post_file WHERE post_id = #{postId}
+    </delete>
+
+    <update id="softDeletePost">
+        UPDATE post SET is_deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectPostList" resultType="click.bcyeon.back01.restapi.post.dto.PostListRawDto">
+        SELECT id, title, content, created_at
+        FROM post
+        WHERE is_deleted = 0
+        <if test="lastId > 0">
+            AND id &lt; #{lastId}
+        </if>
+        ORDER BY id DESC
+        LIMIT #{size}
+    </select>
+
 </mapper>
