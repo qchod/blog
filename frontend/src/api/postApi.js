@@ -13,6 +13,11 @@ export const uploadImage = async (file) => {
     return { url: `${API_SERVER_HOST}${response.data.url}` };
 };
 
+export const getPost = async (id) => {
+    const response = await axios.get(`${prefix}/${id}`, { withCredentials: true });
+    return response.data;
+};
+
 export const getPostList = async (lastId = 0, size = 10) => {
     const response = await axios.get(`${prefix}/list`, {
         params: { lastId, size },

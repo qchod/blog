@@ -11,7 +11,12 @@ const formatDate = (dateStr) => {
 
 const PostList = ({ isAdmin }) => {
     const [posts, setPosts] = useState([]);
-    const [viewType, setViewType] = useState('list');
+    const [viewType, setViewType] = useState(() => localStorage.getItem('postViewType') ?? 'list');
+
+    const handleViewType = (type) => {
+        setViewType(type);
+        localStorage.setItem('postViewType', type);
+    };
     const [hasNext, setHasNext] = useState(true);
     const [loading, setLoading] = useState(false);
     const lastIdRef = useRef(0);
@@ -61,13 +66,13 @@ const PostList = ({ isAdmin }) => {
                 <div className="view-toggle">
                     <button
                         className={`view-btn${viewType === 'list' ? ' active' : ''}`}
-                        onClick={() => setViewType('list')}
+                        onClick={() => handleViewType('list')}
                         aria-label="List view">
                         <i className="bi bi-list-ul" />
                     </button>
                     <button
                         className={`view-btn${viewType === 'album' ? ' active' : ''}`}
-                        onClick={() => setViewType('album')}
+                        onClick={() => handleViewType('album')}
                         aria-label="Album view">
                         <i className="bi bi-grid" />
                     </button>
@@ -82,7 +87,7 @@ const PostList = ({ isAdmin }) => {
             {viewType === 'list' ? (
                 <div className="post-list-view">
                     {posts.map(post => (
-                        <div key={post.id} className="post-list-item">
+                        <div key={post.id} className="post-list-item" onClick={() => navigate(`/post/${post.id}`)}>
                             <span className="post-list-title">{post.title}</span>
                             {post.summary && <p className="post-list-summary">{post.summary}</p>}
                             <span className="post-list-date">{formatDate(post.createdAt)}</span>
@@ -92,7 +97,7 @@ const PostList = ({ isAdmin }) => {
             ) : (
                 <div className="post-album-view">
                     {posts.map(post => (
-                        <div key={post.id} className="post-album-item">
+                        <div key={post.id} className="post-album-item" onClick={() => navigate(`/post/${post.id}`)}>
                             <div className="post-album-thumb">
                                 {post.thumbnailUrl
                                     ? <img src={post.thumbnailUrl} alt={post.title} />
