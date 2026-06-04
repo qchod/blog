@@ -100,6 +100,7 @@ public class PostService {
             PostListItemDto item = new PostListItemDto();
             item.setId(r.getId());
             item.setTitle(r.getTitle());
+            item.setSummary(extractSummary(r.getContent()));
             item.setCreatedAt(r.getCreatedAt());
             item.setThumbnailUrl(extractThumbnail(r.getContent()));
             return item;
@@ -131,6 +132,33 @@ public class PostService {
     private String extractThumbnail(String content) {
         List<String> urls = extractAllImageUrls(content);
         return urls.isEmpty() ? null : urls.get(0);
+    }
+
+    private String extractSummary(String content) {
+        if (content == null || content.isBlank()) return null;
+        try {
+            StringBuilder sb = new StringBuilder();
+            collectText(objectMapper.readTree(content), sb);
+            String text = sb.toString().trim();
+            return text.isEmpty() ? null : text;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    private void collectText(JsonNode node, StringBuilder sb) {
+        if (node.isObject()) {
+            if ("text".equals(node.path("type").asText()) && node.has("text")) {
+                String text = node.path("text").asText();
+                if (!text.isBlank()) {
+                    if (sb.length() > 0) sb.append(" ");
+                    sb.append(text);
+                }
+            }
+            for (JsonNode child : node) collectText(child, sb);
+        } else if (node.isArray()) {
+            for (JsonNode child : node) collectText(child, sb);
+        }
     }
 
     private String getExtension(String filename) {

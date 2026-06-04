@@ -8,6 +8,7 @@ import java.util.Date;
 public class PostListItemDto {
     private int id;
     private String title;
+    private String summary;
     private Date createdAt;
     private String thumbnailUrl;
 }
