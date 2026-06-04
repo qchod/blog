@@ -7,11 +7,12 @@ import TopNav from "./components/common/top/TopNav.jsx"
 import ScrollLine from './components/common/top/ScrollLine.jsx';
 
 import Home from "./pages/Home"
-import About from "./pages/About"
-import Archive from "./pages/Archive"
+// import About from "./pages/About"
+// import Archive from "./pages/Archive"
 import Board from "./pages/Board"
 import Post from "./pages/Post.jsx";
 import PostList from "./pages/PostList.jsx";
+import PostDetail from "./pages/PostDetail.jsx";
 
 import { checkLogin } from './api/auth';
 import Footer from "./components/common/Footer.jsx";
@@ -31,11 +32,12 @@ function App() {
                 <div className="app-content">
                     <Routes>
                         <Route path='/' element={<Home/>}/>
-                        <Route path='/about' element={<About/>}/>
-                        <Route path='/archive' element={<Archive/>}/>
+                        {/* <Route path='/about' element={<About/>}/> */}
+                        {/* <Route path='/archive' element={<Archive/>}/> */}
 
                         <Route path='/post' element={<PostList isAdmin={isAdmin} />}/>
                         <Route path='/post/write' element={<Post/>}/>
+                        <Route path='/post/:id' element={<PostDetail/>}/>
                         <Route path='/board' element={<Board isAdmin={isAdmin} />}/>
                     </Routes>
                 </div>

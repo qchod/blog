@@ -31,21 +31,21 @@ const TopNav = ({ isAdmin, setIsAdmin }) => {
                                 Home
                             </NavLink>
                         </li>
-                        <li className="top-nav__item">
+                        {/* <li className="top-nav__item">
                             <NavLink to="/about" className={({isActive}) => `top-nav__link ${isActive ? "active" : ""}`}>
                                 About
                             </NavLink>
-                        </li>
+                        </li> */}
                         <li className="top-nav__item">
                             <NavLink to="/post" className={({isActive}) => `top-nav__link ${isActive ? "active" : ""}`}>
                                 Post
                             </NavLink>
                         </li>
-                        <li className="top-nav__item">
+                        {/* <li className="top-nav__item">
                             <NavLink to="/archive" className={({isActive}) => `top-nav__link ${isActive ? "active" : ""}`}>
                                 Archive
                             </NavLink>
-                        </li>
+                        </li> */}
                         <li className="top-nav__item">
                             <NavLink to="/board" className={({isActive}) => `top-nav__link ${isActive ? "active" : ""}`}>
                                 Board
