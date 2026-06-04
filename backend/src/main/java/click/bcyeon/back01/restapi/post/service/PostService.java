@@ -81,6 +81,16 @@ public class PostService {
         return postDto;
     }
 
+    public PostDto getPost(int id) {
+        PostDto post = postMapper.selectPost(id);
+        if (post == null) return null;
+        List<PostFileDto> attachments = postMapper.selectPostFiles(id).stream()
+                .filter(f -> "attachment".equals(f.getFileType()))
+                .toList();
+        post.setFiles(attachments);
+        return post;
+    }
+
     public void deletePost(int id) {
         List<PostFileDto> files = postMapper.selectPostFiles(id);
         for (PostFileDto file : files) {

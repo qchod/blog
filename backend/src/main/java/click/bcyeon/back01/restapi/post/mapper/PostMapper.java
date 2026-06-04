@@ -17,6 +17,8 @@ public interface PostMapper {
 
     List<PostListRawDto> selectPostList(@Param("lastId") int lastId, @Param("size") int size);
 
+    PostDto selectPost(int id);
+
     List<PostFileDto> selectPostFiles(int postId);
 
     void deletePostFiles(int postId);

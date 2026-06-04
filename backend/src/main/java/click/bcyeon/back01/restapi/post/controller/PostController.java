@@ -28,6 +28,12 @@ public class PostController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDto> getPost(@PathVariable int id) {
+        PostDto post = postService.getPost(id);
+        return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable int id) {
         postService.deletePost(id);

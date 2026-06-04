@@ -33,6 +33,12 @@
     </insert>
 
 
+    <select id="selectPost" resultType="click.bcyeon.back01.restapi.post.dto.PostDto">
+        SELECT id, title, content, created_at, updated_at
+        FROM post
+        WHERE id = #{id} AND is_deleted = 0
+    </select>
+
     <select id="selectPostFiles" resultType="click.bcyeon.back01.restapi.post.dto.PostFileDto">
         SELECT id, post_id, original_name, saved_name, file_type, file_url, created_at
         FROM post_file
