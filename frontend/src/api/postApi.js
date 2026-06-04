@@ -13,6 +13,14 @@ export const uploadImage = async (file) => {
     return { url: `${API_SERVER_HOST}${response.data.url}` };
 };
 
+export const getPostList = async (lastId = 0, size = 10) => {
+    const response = await axios.get(`${prefix}/list`, {
+        params: { lastId, size },
+        withCredentials: true,
+    });
+    return response.data;
+};
+
 export const savePost = async ({ title, content, attachments }) => {
     const formData = new FormData();
     formData.append("title", title);

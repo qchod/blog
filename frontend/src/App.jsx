@@ -11,6 +11,7 @@ import About from "./pages/About"
 import Archive from "./pages/Archive"
 import Board from "./pages/Board"
 import Post from "./pages/Post.jsx";
+import PostList from "./pages/PostList.jsx";
 
 import { checkLogin } from './api/auth';
 import Footer from "./components/common/Footer.jsx";
@@ -33,7 +34,8 @@ function App() {
                         <Route path='/about' element={<About/>}/>
                         <Route path='/archive' element={<Archive/>}/>
 
-                        <Route path='/post' element={<Post/>}/>
+                        <Route path='/post' element={<PostList isAdmin={isAdmin} />}/>
+                        <Route path='/post/write' element={<Post/>}/>
                         <Route path='/board' element={<Board isAdmin={isAdmin} />}/>
                     </Routes>
                 </div>

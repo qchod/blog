@@ -1,0 +1,171 @@
+.post-list-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 600px;
+    margin-bottom: 8px;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 2px;
+}
+
+.view-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 8px;
+    color: #bbb;
+    font-size: 16px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: color 0.15s;
+}
+
+.view-btn.active,
+.view-btn:hover {
+    color: #333;
+}
+
+.post-write-btn {
+    background: none;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    padding: 5px 14px;
+    font-size: 13px;
+    color: #555;
+    border-radius: 4px;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+
+.post-write-btn:hover {
+    background: #f5f5f5;
+}
+
+/* List view */
+.post-list-view {
+    width: 600px;
+}
+
+.post-list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.post-list-item:hover .post-list-title {
+    text-decoration: underline;
+}
+
+.post-list-title {
+    font-size: 15px;
+    line-height: 22px;
+    color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-list-summary {
+    margin: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: #888;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-list-date {
+    font-size: 13px;
+    line-height: 18px;
+    color: #bbb;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Album view */
+.post-album-view {
+    width: 600px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    gap: 16px;
+}
+
+.post-album-item {
+    cursor: pointer;
+}
+
+.post-album-thumb {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    margin-bottom: 8px;
+    background: #f0f0f0;
+}
+
+.post-album-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.post-album-no-thumb {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+}
+
+.post-album-info {
+    display: grid;
+    grid-template-rows: 20px 36px 18px;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.post-album-title {
+    font-size: 14px;
+    line-height: 20px;
+    color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-album-summary {
+    margin: 0;
+    font-size: 12px;
+    line-height: 18px;
+    color: #888;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-album-date {
+    font-size: 12px;
+    line-height: 18px;
+    color: #bbb;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.post-list-loading {
+    margin: 20px 0;
+    font-size: 13px;
+    color: #bbb;
+}
+
+.post-list-view,
+.post-album-view {
+    margin-bottom: 40px;
+}

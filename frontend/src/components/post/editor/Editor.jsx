@@ -20,6 +20,7 @@ import {
     TextNode,
 } from 'lexical';
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useToast } from '../../common/Toast';
 
 import ExampleTheme from './ExampleTheme.js';
@@ -131,6 +132,7 @@ export default function Editor() {
     const [isSaving, setIsSaving] = useState(false);
     const editorStateRef = useRef(null);
     const { showToast } = useToast();
+    const navigate = useNavigate();
 
     const handleSave = async () => {
         if (!title.trim()) {
@@ -142,6 +144,7 @@ export default function Editor() {
         try {
             await savePost({ title, content, attachments });
             showToast('Post published.');
+            navigate('/post');
         } catch (e) {
             console.error(e);
             showToast('Failed to publish post.');
